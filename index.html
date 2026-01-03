@@ -4,14 +4,45 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/src/style.css" />
     <title>laysproject</title>
   </head>
   <body>
     <main class="containers">
-      <div class="container" id="text">
+      <div class="text">
         <h1>Choose your flavor!</h1>
+
+        <p>
+          Welkom bij de Lay's chips-configurator! Heb je altijd al gedroomd van
+          een chipsmaak die (nog) niet bestaat? Dit is jouw kans! <br />Stel
+          stap voor stap je eigen unieke Lay's-chips samen: kies je smaak,
+          ontwerp je zak en maak er iets helemaal van jou van. Verstuur aan het
+          einde jouw creatie en wie weet wordt jouw smaak wel het volgende
+          officiële Lay's-product!
+        </p>
+        <p>
+          Ben je klaar om je creativiteit de vrije loop te laten gaan?<br />
+          Druk op de startknop en begin met het ontwerpen van jouw droomchips!
+        </p>
+
+        <div class="rules">
+          <input type="checkbox" id="rulesCheck" />
+          <label for="rulesCheck"
+            >Ik heb de
+            <a
+              target="_blank"
+              href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&list=RDdQw4w9WgXcQ&start_radio=1"
+              >regels</a
+            >
+            gelezen en ga akkoord</label
+          >
+        </div>
+
+        <button id="startBtn" disabled>Start configuratie</button>
       </div>
     </main>
+
     <script type="module" src="/src/main.js"></script>
+    <script type="module" src="/src/app.js"></script>
   </body>
 </html>

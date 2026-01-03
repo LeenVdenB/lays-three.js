@@ -2,6 +2,7 @@ import "./style.css";
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
+import { RGBELoader } from "three/examples/jsm/loaders/RGBELoader.js";
 
 //renderer
 const renderer = new THREE.WebGLRenderer({ antialias: true });
@@ -13,6 +14,8 @@ renderer.setPixelRatio(window.devicePixelRatio);
 
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.0;
 
 document.body.appendChild(renderer.domElement);
 
@@ -41,23 +44,30 @@ controls.target = new THREE.Vector3(0, 2, 0);
 controls.minAzimuthAngle = -Math.PI * (80 / 180); // -80°
 controls.maxAzimuthAngle = Math.PI * (80 / 180); // +80°
 
-//ground
-const groundGeometry = new THREE.PlaneGeometry(20, 20, 32, 32);
-groundGeometry.rotateX(-Math.PI / 2);
-const groundMaterial = new THREE.MeshStandardMaterial({
-  color: 0x555555,
-  side: THREE.DoubleSide,
+// stand loader
+const stand = new GLTFLoader();
+stand.load("/3d-object/small_stand.glb", (gltf) => {
+  const model = gltf.scene;
+  model.position.set(5, -7, 1);
+  model.rotation.y = 0;
+  model.scale.set(8, 8, 8); // vergroot indien te klein
+
+  model.traverse((child) => {
+    if (child.isMesh) {
+      child.castShadow = true;
+      child.receiveShadow = true;
+      child.material.color.set("#8b5a2b");
+    }
+  });
+
+  scene.add(model);
 });
-const ground = new THREE.Mesh(groundGeometry, groundMaterial);
-ground.castShadow = false;
-ground.receiveShadow = true;
-scene.add(ground);
 
 //light
 const ambientLight = new THREE.AmbientLight(0xffffff, 0.1);
 scene.add(ambientLight);
 
-const spotLight = new THREE.SpotLight(0xffffff, 50);
+const spotLight = new THREE.SpotLight(0xffffff, 10);
 spotLight.position.set(0, 12, 5); //x, y, z
 spotLight.castShadow = true;
 spotLight.shadow.biasq = -0.0001;
@@ -81,18 +91,12 @@ loader.load("/3d-object/chips_arthur_de_klerck.glb", (gltf) => {
   scene.add(model);
 });
 
-//texture loader
-const textureLoader = new THREE.TextureLoader();
-textureLoader.colorSpace = THREE.LinearSRGBColorSpace;
-const backgroundTexture = textureLoader.load(
-  "/environment/studio_small_03_4k.hdr",
-  function (texture) {
-    texture.mapping = THREE.EquirectangularReflectionMapping;
-    scene.background = backgroundTexture;
-    scene.environment = backgroundTexture;
-  }
-);
+new RGBELoader().load("/environment/studio_small_03_4k.hdr", (texture) => {
+  texture.mapping = THREE.EquirectangularReflectionMapping;
 
+  scene.background = texture;
+  scene.environment = texture;
+});
 
 //render scene
 function animate() {

@@ -33,7 +33,10 @@ toStep2.addEventListener("click", () => {
 const colorPicker = document.getElementById("colorPicker");
 
 colorPicker.addEventListener("input", () => {
+  if (!window.selectedMesh) return; // geen mesh geselecteerd
+
   const hex = colorPicker.value;
+  window.selectedMesh.material.color.set(hex);
   console.log("Gekozen kleur:", hex);
 
   // later: chipszak materiaal aanpassen

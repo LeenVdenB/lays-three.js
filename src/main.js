@@ -3,6 +3,9 @@ import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { RGBELoader } from "three/examples/jsm/loaders/RGBELoader.js";
+const raycaster = new THREE.Raycaster();
+const mouse = new THREE.Vector2();
+window.selectedMesh = null;
 
 //renderer
 const renderer = new THREE.WebGLRenderer({ antialias: true });
@@ -41,8 +44,8 @@ controls.minPolarAngle = 0.5;
 controls.maxPolarAngle = 1.5;
 controls.autoRotate = false;
 controls.target = new THREE.Vector3(-2, 2, 0);
-controls.minAzimuthAngle = -Math.PI * (80 / 180); // -80°
-controls.maxAzimuthAngle = Math.PI * (80 / 180); // +80°
+controls.minAzimuthAngle = -Math.PI * (70 / 180); // -70°
+controls.maxAzimuthAngle = Math.PI * (70 / 180); // +70°
 
 // stand loader
 const stand = new GLTFLoader();
@@ -63,6 +66,7 @@ stand.load("/3d-object/small_stand.glb", (gltf) => {
   scene.add(model);
 });
 
+let chipsModel = null;
 //gltf loader van de chipszak
 const loader = new GLTFLoader();
 loader.load("/3d-object/chips_arthur_de_klerck.glb", (gltf) => {
@@ -70,6 +74,9 @@ loader.load("/3d-object/chips_arthur_de_klerck.glb", (gltf) => {
   model.position.set(-4, 4, 0);
   model.rotation.y = 0.5;
   model.scale.set(3, 3, 3); // vergroot indien te klein
+
+  model.name = "chips";
+  chipsModel = model;
 
   model.traverse((child) => {
     if (child.isMesh) {
@@ -105,3 +112,25 @@ function animate() {
   controls.update();
 }
 animate();
+
+window.addEventListener("pointerdown", (event) => {
+  // muispositie normaliseren
+  mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+  mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+  // raycast uitvoeren
+  raycaster.setFromCamera(mouse, camera);
+
+  // alleen raycasten op de chipszak, niet op de hele scene
+  if (!chipsModel) return;
+
+  const intersects = raycaster.intersectObjects(chipsModel.children, true);
+
+  if (intersects.length === 0) {
+    console.log("Niets geraakt");
+    return;
+  }
+
+  window.selectedMesh = intersects[0].object;
+  console.log("Geselecteerd mesh:", window.selectedMesh);
+});

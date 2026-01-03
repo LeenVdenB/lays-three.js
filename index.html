@@ -9,37 +9,54 @@
   </head>
   <body>
     <main class="containers">
-      <div class="text">
-        <h1>Choose your flavor!</h1>
+      <section>
+        <div class="text">
+          <h1>Choose your flavor!</h1>
 
-        <p>
-          Welkom bij de Lay's chips-configurator! Heb je altijd al gedroomd van
-          een chipsmaak die (nog) niet bestaat? Dit is jouw kans! <br />Stel
-          stap voor stap je eigen unieke Lay's-chips samen: kies je smaak,
-          ontwerp je zak en maak er iets helemaal van jou van. Verstuur aan het
-          einde jouw creatie en wie weet wordt jouw smaak wel het volgende
-          officiële Lay's-product!
-        </p>
-        <p>
-          Ben je klaar om je creativiteit de vrije loop te laten gaan?<br />
-          Druk op de startknop en begin met het ontwerpen van jouw droomchips!
-        </p>
+          <p>
+            Welkom bij de Lay's chips-configurator! Heb je altijd al gedroomd
+            van een chipsmaak die (nog) niet bestaat? Dit is jouw kans!
+            <br />Stel stap voor stap je eigen unieke Lay's-chips samen: kies je
+            smaak, ontwerp je zak en maak er iets helemaal van jou van. Verstuur
+            aan het einde jouw creatie en wie weet wordt jouw smaak wel het
+            volgende officiële Lay's-product!
+          </p>
+          <p>
+            Ben je klaar om je creativiteit de vrije loop te laten gaan?<br />
+            Druk op de startknop en begin met het ontwerpen van jouw droomchips!
+          </p>
 
-        <div class="rules">
-          <input type="checkbox" id="rulesCheck" />
-          <label for="rulesCheck"
-            >Ik heb de
-            <a
-              target="_blank"
-              href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&list=RDdQw4w9WgXcQ&start_radio=1"
-              >regels</a
+          <div class="rules">
+            <input type="checkbox" id="rulesCheck" />
+            <label for="rulesCheck"
+              >Ik heb de
+              <a
+                target="_blank"
+                href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&list=RDdQw4w9WgXcQ&start_radio=1"
+                >regels</a
+              >
+              gelezen en ga akkoord</label
             >
-            gelezen en ga akkoord</label
-          >
-        </div>
+          </div>
 
-        <button id="startBtn" disabled>Start configuratie</button>
-      </div>
+          <button id="startBtn" disabled>Start configuratie</button>
+        </div>
+      </section>
+      <section>
+        <!-- Stap 1: Kleur kiezen -->
+        <div class="text step-1" style="display: none">
+          <div class="step-header">
+            <button class="back-btn" id="backToIntro">← Ga terug</button>
+            <span class="step-indicator">Stap 1 van 3</span>
+          </div>
+          <h1>Kies een kleur</h1>
+
+          <label class="display" for="colorPicker">Selecteer een kleur:</label>
+          <input type="color" id="colorPicker" value="#ff0000" />
+
+          <button id="toStep2">Volgende stap</button>
+        </div>
+      </section>
     </main>
 
     <script type="module" src="/src/main.js"></script>

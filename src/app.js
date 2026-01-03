@@ -12,6 +12,29 @@ rulesCheck.addEventListener("change", () => {
 });
 
 startBtn.addEventListener("click", () => {
-  document.querySelector(".text").style.display = "none";
-  // hier komt straks je configurator UI
+  document.querySelector(".text").style.display = "none"; // intro weg
+  document.querySelector(".step-1").style.display = "flex"; // stap 1 tonen
+});
+
+const backToIntro = document.getElementById("backToIntro");
+
+backToIntro.addEventListener("click", () => {
+  document.querySelector(".step-1").style.display = "none";
+  document.querySelector(".text").style.display = "flex"; // intro terug
+});
+
+const toStep2 = document.getElementById("toStep2");
+
+toStep2.addEventListener("click", () => {
+  console.log("Ga naar stap 2");
+  // hier komt straks je naam-stap
+});
+
+const colorPicker = document.getElementById("colorPicker");
+
+colorPicker.addEventListener("input", () => {
+  const hex = colorPicker.value;
+  console.log("Gekozen kleur:", hex);
+
+  // later: chipszak materiaal aanpassen
 });

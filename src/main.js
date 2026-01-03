@@ -26,7 +26,7 @@ const camera = new THREE.PerspectiveCamera(
   1,
   1000
 );
-camera.position.set(0, 3, 12); //x, y, z
+camera.position.set(0, 4, 12); //x, y, z
 
 //OrbitControls toevoegen
 const controls = new OrbitControls(camera, renderer.domElement);
@@ -38,6 +38,8 @@ controls.minPolarAngle = 0.5;
 controls.maxPolarAngle = 1.5;
 controls.autoRotate = false;
 controls.target = new THREE.Vector3(0, 2, 0);
+controls.minAzimuthAngle = -Math.PI * (80 / 180); // -80°
+controls.maxAzimuthAngle = Math.PI * (80 / 180); // +80°
 
 //ground
 const groundGeometry = new THREE.PlaneGeometry(20, 20, 32, 32);
@@ -56,17 +58,18 @@ const ambientLight = new THREE.AmbientLight(0xffffff, 0.1);
 scene.add(ambientLight);
 
 const spotLight = new THREE.SpotLight(0xffffff, 50);
-spotLight.position.set(0, 12, 5);
+spotLight.position.set(0, 12, 5); //x, y, z
 spotLight.castShadow = true;
 spotLight.shadow.biasq = -0.0001;
 scene.add(spotLight);
 
 //gltf loader van de chipszak
 const loader = new GLTFLoader();
-loader.load("/3d-object/chipsLays.glb", (gltf) => {
+loader.load("/3d-object/chips_arthur_de_klerck.glb", (gltf) => {
   const model = gltf.scene;
-  model.position.set(0, 1, 0);
-  model.scale.set(20, 20, 20); // vergroot indien te klein
+  model.position.set(0, 4, 0);
+  model.rotation.y = 0.5;
+  model.scale.set(3, 3, 3); // vergroot indien te klein
 
   model.traverse((child) => {
     if (child.isMesh) {
@@ -77,6 +80,19 @@ loader.load("/3d-object/chipsLays.glb", (gltf) => {
 
   scene.add(model);
 });
+
+//texture loader
+const textureLoader = new THREE.TextureLoader();
+textureLoader.colorSpace = THREE.LinearSRGBColorSpace;
+const backgroundTexture = textureLoader.load(
+  "/environment/studio_small_03_4k.hdr",
+  function (texture) {
+    texture.mapping = THREE.EquirectangularReflectionMapping;
+    scene.background = backgroundTexture;
+    scene.environment = backgroundTexture;
+  }
+);
+
 
 //render scene
 function animate() {

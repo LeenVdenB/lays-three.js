@@ -29,7 +29,7 @@ const camera = new THREE.PerspectiveCamera(
   1,
   1000
 );
-camera.position.set(0, 4, 12); //x, y, z
+camera.position.set(0, 4, 13); //x, y, z
 
 //OrbitControls toevoegen
 const controls = new OrbitControls(camera, renderer.domElement);
@@ -40,7 +40,7 @@ controls.maxDistance = 15;
 controls.minPolarAngle = 0.5;
 controls.maxPolarAngle = 1.5;
 controls.autoRotate = false;
-controls.target = new THREE.Vector3(0, 2, 0);
+controls.target = new THREE.Vector3(-2, 2, 0);
 controls.minAzimuthAngle = -Math.PI * (80 / 180); // -80°
 controls.maxAzimuthAngle = Math.PI * (80 / 180); // +80°
 
@@ -48,7 +48,7 @@ controls.maxAzimuthAngle = Math.PI * (80 / 180); // +80°
 const stand = new GLTFLoader();
 stand.load("/3d-object/small_stand.glb", (gltf) => {
   const model = gltf.scene;
-  model.position.set(5, -7, 1);
+  model.position.set(1, -7, 1);
   model.rotation.y = 0;
   model.scale.set(8, 8, 8); // vergroot indien te klein
 
@@ -57,6 +57,24 @@ stand.load("/3d-object/small_stand.glb", (gltf) => {
       child.castShadow = true;
       child.receiveShadow = true;
       child.material.color.set("#8b5a2b");
+    }
+  });
+
+  scene.add(model);
+});
+
+//gltf loader van de chipszak
+const loader = new GLTFLoader();
+loader.load("/3d-object/chips_arthur_de_klerck.glb", (gltf) => {
+  const model = gltf.scene;
+  model.position.set(-4, 4, 0);
+  model.rotation.y = 0.5;
+  model.scale.set(3, 3, 3); // vergroot indien te klein
+
+  model.traverse((child) => {
+    if (child.isMesh) {
+      child.castShadow = true;
+      child.receiveShadow = true;
     }
   });
 
@@ -72,24 +90,6 @@ spotLight.position.set(0, 12, 5); //x, y, z
 spotLight.castShadow = true;
 spotLight.shadow.biasq = -0.0001;
 scene.add(spotLight);
-
-//gltf loader van de chipszak
-const loader = new GLTFLoader();
-loader.load("/3d-object/chips_arthur_de_klerck.glb", (gltf) => {
-  const model = gltf.scene;
-  model.position.set(0, 4, 0);
-  model.rotation.y = 0.5;
-  model.scale.set(3, 3, 3); // vergroot indien te klein
-
-  model.traverse((child) => {
-    if (child.isMesh) {
-      child.castShadow = true;
-      child.receiveShadow = true;
-    }
-  });
-
-  scene.add(model);
-});
 
 new RGBELoader().load("/environment/studio_small_03_4k.hdr", (texture) => {
   texture.mapping = THREE.EquirectangularReflectionMapping;

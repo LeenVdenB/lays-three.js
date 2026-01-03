@@ -1,0 +1,37 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/*
+.containers {
+  display: flex;
+  justify-content: space-around;
+  height: 100vh;
+  background-color: #f5f5f5;
+}
+
+canvas {
+  width: 65vw;
+  height: 100vh;
+  display: block;
+}
+
+#text {
+  background-color: rgb(243, 225, 61);
+  display: flex;
+  justify-content: flex-start;
+  padding: 2em;
+  width: 35vw;
+  height: 100vh;
+  border-radius: 5%;
+}
+
+#text h1 {
+  font-family: Arial, Helvetica, sans-serif;
+}
+*/

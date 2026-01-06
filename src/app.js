@@ -1,5 +1,14 @@
 import { color } from "three/tsl";
 
+// User ophalen uit de URL
+const params = new URLSearchParams(window.location.search);
+const userEmail = params.get("user");
+
+// Als er geen user is → anonymous
+const currentUser = userEmail || "anonymous";
+
+console.log("Ingelogde gebruiker:", currentUser);
+
 const rulesCheck = document.getElementById("rulesCheck");
 const startBtn = document.getElementById("startBtn");
 

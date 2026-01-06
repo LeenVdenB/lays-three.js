@@ -36,20 +36,48 @@ backToStep1.addEventListener("click", () => {
   document.querySelector(".step-1").style.display = "flex";
 });
 
-// ⭐ Kleur voor de body
 document.getElementById("colorBody").addEventListener("input", (e) => {
   if (!window.meshParts || !window.meshParts[0]) return;
   window.meshParts[0].material.color.set(e.target.value);
 });
 
-// ⭐ Kleur voor de titel
 document.getElementById("colorTitle").addEventListener("input", (e) => {
   if (!window.meshParts || !window.meshParts[2]) return;
   window.meshParts[2].material.color.set(e.target.value);
 });
 
-// ⭐ Kleur voor de afbeelding / groot vlak
 document.getElementById("colorImage").addEventListener("input", (e) => {
   if (!window.meshParts || !window.meshParts[3]) return;
   window.meshParts[3].material.color.set(e.target.value);
 });
+
+function updateTitleCanvas() {
+  const text = document.getElementById("titleInput").value;
+  const color = document.getElementById("titleColor").value;
+  const font = document.getElementById("titleFont").value;
+
+  const ctx = window.titleCtx;
+  const canvas = window.titleCanvas;
+
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  const size = document.getElementById("titleSize").value;
+  ctx.fillStyle = color;
+  ctx.font = `${size}px ${font}`;
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  ctx.fillText(text, canvas.width / 2, canvas.height / 2);
+  window.titleTexture.needsUpdate = true;
+}
+
+document
+  .getElementById("titleInput")
+  .addEventListener("input", updateTitleCanvas);
+document
+  .getElementById("titleColor")
+  .addEventListener("input", updateTitleCanvas);
+document
+  .getElementById("titleFont")
+  .addEventListener("change", updateTitleCanvas);
+document
+  .getElementById("titleSize")
+  .addEventListener("input", updateTitleCanvas);

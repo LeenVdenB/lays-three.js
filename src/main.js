@@ -66,6 +66,24 @@ stand.load("/3d-object/small_stand.glb", (gltf) => {
   scene.add(model);
 });
 
+// ⭐ Canvas voor titel
+const titleCanvasElement = document.createElement("canvas");
+titleCanvasElement.width = 1024;
+titleCanvasElement.height = 256;
+
+const titleCtxElement = titleCanvasElement.getContext("2d");
+// transparante achtergrond
+titleCtxElement.clearRect(
+  0,
+  0,
+  titleCanvasElement.width,
+  titleCanvasElement.height
+);
+
+// Globaal maken
+window.titleCanvas = titleCanvasElement;
+window.titleCtx = titleCtxElement;
+
 let chipsModel = null;
 //gltf loader van de chipszak
 const loader = new GLTFLoader();
@@ -91,6 +109,27 @@ loader.load("/3d-object/chips_arthur_de_klerck.glb", (gltf) => {
     }
   });
 
+  const titleTexture = new THREE.CanvasTexture(window.titleCanvas);
+  const titleMaterial = new THREE.MeshBasicMaterial({
+    map: titleTexture,
+    transparent: true,
+  });
+  const titlePlane = new THREE.Mesh(
+    new THREE.PlaneGeometry(2.8, 0.6),
+    titleMaterial
+  );
+  titlePlane.position.copy(window.meshParts[2].position);
+  titlePlane.position.z += 1.5;
+  titlePlane.position.y += 4.3;
+  titlePlane.position.x -= 4;
+  titlePlane.quaternion.copy(window.meshParts[2].quaternion);
+  titlePlane.rotation.x += 6;
+
+  scene.add(titlePlane);
+
+  window.titlePlane = titlePlane;
+  window.titleTexture = titleTexture;
+
   scene.add(model);
 });
 
@@ -110,6 +149,16 @@ new RGBELoader().load("/environment/studio_small_03_4k.hdr", (texture) => {
   scene.background = texture;
   scene.environment = texture;
 });
+
+//Canvas voor titel
+export const titleCanvas = document.createElement("canvas");
+titleCanvas.width = 1024; // hoge resolutie voor scherpe tekst
+titleCanvas.height = 512;
+
+export const titleCtx = titleCanvas.getContext("2d");
+
+// Voorlopig: canvas leegmaken
+titleCtx.clearRect(0, 0, titleCanvas.width, titleCanvas.height);
 
 //render scene
 function animate() {

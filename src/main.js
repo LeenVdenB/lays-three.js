@@ -22,6 +22,35 @@ renderer.toneMappingExposure = 1.0;
 
 document.body.appendChild(renderer.domElement);
 
+// Create preloader div
+const preloader = document.createElement("div");
+preloader.id = "preloader";
+preloader.textContent = "Loading...";
+preloader.style.cssText = `
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #e66634ff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  font-size: 48px;
+  color: white;
+  font-family: Arial, sans-serif;
+`;
+document.body.appendChild(preloader);
+
+// Loading Manager
+const loadingManager = new THREE.LoadingManager(() => {
+  // All assets loaded - wait 3 seconds then hide preloader
+  setTimeout(() => {
+    preloader.style.display = "none";
+  }, 3000);
+});
+
 //scene
 const scene = new THREE.Scene();
 

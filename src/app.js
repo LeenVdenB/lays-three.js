@@ -204,7 +204,7 @@ async function saveBag() {
   ];
 
   const userName = document.getElementById("userName").value;
-  const userEmail = document.getElementById("userEmail").value;
+  const userEmailInput = document.getElementById("userEmail").value;
   const screenshot = renderer.domElement.toDataURL("image/png");
 
   const bagData = {
@@ -214,7 +214,7 @@ async function saveBag() {
     font: font,
     user: {
       name: userName,
-      email: userEmail,
+      email: userEmailInput,
     },
     userId: storedUserId || currentUser,
     image: screenshot,

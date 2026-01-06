@@ -77,7 +77,7 @@ controls.minAzimuthAngle = -Math.PI * (70 / 180);
 controls.maxAzimuthAngle = Math.PI * (70 / 180);
 
 // stand loader
-const stand = new GLTFLoader();
+const stand = new GLTFLoader(loadingManager);
 stand.load("/3d-object/small_stand.glb", (gltf) => {
   const model = gltf.scene;
   model.position.set(1, -7, 1);
@@ -128,7 +128,7 @@ window.imageCtx = imageCtxElement;
 
 let chipsModel = null;
 //gltf loader van de chipszak
-const loader = new GLTFLoader();
+const loader = new GLTFLoader(loadingManager);
 loader.load("/3d-object/chips_arthur_de_klerck.glb", (gltf) => {
   const model = gltf.scene;
   model.position.set(-4, 4, 0);
@@ -211,12 +211,15 @@ spotLight.castShadow = true;
 spotLight.shadow.biasq = -0.0001;
 scene.add(spotLight);
 
-new RGBELoader().load("/environment/studio_small_03_4k.hdr", (texture) => {
-  texture.mapping = THREE.EquirectangularReflectionMapping;
+new RGBELoader(loadingManager).load(
+  "/environment/studio_small_03_4k.hdr",
+  (texture) => {
+    texture.mapping = THREE.EquirectangularReflectionMapping;
 
-  scene.background = texture;
-  scene.environment = texture;
-});
+    scene.background = texture;
+    scene.environment = texture;
+  }
+);
 
 //Canvas voor titel
 export const titleCanvas = document.createElement("canvas");

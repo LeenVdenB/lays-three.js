@@ -77,9 +77,13 @@ loader.load("/3d-object/chips_arthur_de_klerck.glb", (gltf) => {
 
   model.name = "chips";
   chipsModel = model;
+  let meshIndex = 0;
 
   model.traverse((child) => {
     if (child.isMesh) {
+      child.userData.index = meshIndex;
+      console.log("mesh", meshIndex, "=", child.name);
+      meshIndex++;
       child.castShadow = true;
       child.receiveShadow = true;
     }
@@ -113,7 +117,7 @@ function animate() {
 }
 animate();
 
-window.addEventListener("pointerdown", (event) => {
+window.addEventListener("click", (event) => {
   // muispositie normaliseren
   mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
   mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
@@ -132,5 +136,6 @@ window.addEventListener("pointerdown", (event) => {
   }
 
   window.selectedMesh = intersects[0].object;
-  console.log("Geselecteerd mesh:", window.selectedMesh);
+  console.log("Geselecteerd mesh index:", window.selectedMesh.userData.index);
+  window.selectedMesh.material.color.set("#ff0000");
 });

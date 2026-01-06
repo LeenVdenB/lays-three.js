@@ -145,6 +145,7 @@ loader.load("/3d-object/chips_arthur_de_klerck.glb", (gltf) => {
 
   //afbeelding toevoegen als een apart vlak met de canvas als textuur
   const imageTexture = new THREE.CanvasTexture(window.imageCanvas);
+  imageTexture.flipY = false;
 
   const imageMaterial = new THREE.MeshBasicMaterial({
     map: imageTexture,
@@ -158,8 +159,11 @@ loader.load("/3d-object/chips_arthur_de_klerck.glb", (gltf) => {
   imagePlane.position.z += 2;
   imagePlane.position.y += 2.5;
   imagePlane.position.x -= 3.9;
+
   imagePlane.quaternion.copy(window.meshParts[3].quaternion);
   imagePlane.rotation.x += 2.9;
+  imagePlane.rotation.y += Math.PI;
+  imagePlane.scale.x *= -1; // zorgt ervoor dat afbeelding niet gespiegeld is
 
   scene.add(imagePlane);
   window.imagePlane = imagePlane;

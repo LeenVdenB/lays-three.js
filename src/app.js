@@ -92,6 +92,32 @@ function updateTitleCanvas() {
   window.titleTexture.needsUpdate = true;
 }
 
+document.getElementById("imageUpload").addEventListener("change", function (e) {
+  console.log("👉 imageUpload change event fired", e.target.files[0]);
+  const file = e.target.files[0];
+  if (!file) return;
+
+  const img = new Image();
+  img.onload = () => {
+    const ctx = window.imageCtx;
+    const canvas = window.imageCanvas;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const scale = Math.min(
+      canvas.width / img.width,
+      canvas.height / img.height
+    );
+
+    const w = img.width * scale;
+    const h = img.height * scale;
+    const x = (canvas.width - w) / 2;
+    const y = (canvas.height - h) / 2;
+    ctx.drawImage(img, x, y, w, h);
+    window.imageTexture.needsUpdate = true;
+  };
+
+  img.src = URL.createObjectURL(file);
+});
+
 document
   .getElementById("titleInput")
   .addEventListener("input", updateTitleCanvas);

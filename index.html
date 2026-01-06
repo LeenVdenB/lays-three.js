@@ -47,7 +47,7 @@
         <div class="text step-1" style="display: none">
           <div class="step-header">
             <button class="back-btn" id="backToIntro">← Ga terug</button>
-            <span class="step-indicator">Stap 1 van 3</span>
+            <span class="step-indicator">Stap 1 van 4</span>
           </div>
           <h1>Kies een kleur</h1>
 
@@ -74,7 +74,7 @@
         <div class="text step-2" style="display: none">
           <div class="step-header">
             <button class="back-btn" id="backToStep1">← Ga terug</button>
-            <span class="step-indicator">Stap 2 van 3</span>
+            <span class="step-indicator">Stap 2 van 4</span>
           </div>
           <h1>Kies een naam voor jouw chipssmaak!</h1>
           <div class="options">
@@ -99,6 +99,50 @@
             </select>
           </div>
           <button id="toStep3">Volgende stap</button>
+        </div>
+      </section>
+      <section>
+        <!-- Stap 3: Afbeelding uploaden -->
+        <div class="text step-3" style="display: none">
+          <div class="step-header">
+            <button class="back-btn" id="backToStep2">← Ga terug</button>
+            <span class="step-indicator">Stap 3 van 4</span>
+          </div>
+
+          <h1>Voeg een afbeelding toe</h1>
+          <div class="options">
+            <label class="display" for="imageUpload"
+              >Upload een afbeelding:</label
+            >
+            <input type="file" id="imageUpload" accept="image/*" />
+          </div>
+
+          <button id="toStep4">Volgende stap</button>
+        </div>
+      </section>
+      <section>
+        <!-- Stap 4: Gegevens invullen -->
+        <div class="text step-4" style="display: none">
+          <div class="step-header">
+            <button class="back-btn" id="backToStep3">← Ga terug</button>
+            <span class="step-indicator">Stap 4 van 4</span>
+          </div>
+
+          <h1>Jouw gegevens</h1>
+          <div class="options">
+            <label class="display" for="userName">Naam:</label>
+            <input
+              type="text"
+              id="userName"
+              placeholder="Voornaam + achternaam"
+            />
+          </div>
+          <div class="options">
+            <label class="display" for="userEmail">Email:</label>
+            <input type="email" id="userEmail" placeholder="naam@example.com" />
+          </div>
+
+          <button id="submitConfig">Indienen</button>
         </div>
       </section>
     </main>

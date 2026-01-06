@@ -36,6 +36,29 @@ backToStep1.addEventListener("click", () => {
   document.querySelector(".step-1").style.display = "flex";
 });
 
+const toStep3 = document.getElementById("toStep3");
+toStep3.addEventListener("click", () => {
+  document.querySelector(".step-2").style.display = "none";
+  document.querySelector(".step-3").style.display = "flex";
+});
+
+const backToStep2 = document.getElementById("backToStep2");
+backToStep2.addEventListener("click", () => {
+  document.querySelector(".step-3").style.display = "none";
+  document.querySelector(".step-2").style.display = "flex";
+});
+
+const toStep4 = document.getElementById("toStep4");
+toStep4.addEventListener("click", () => {
+  document.querySelector(".step-3").style.display = "none";
+  document.querySelector(".step-4").style.display = "flex";
+});
+const backToStep3 = document.getElementById("backToStep3");
+backToStep3.addEventListener("click", () => {
+  document.querySelector(".step-4").style.display = "none";
+  document.querySelector(".step-3").style.display = "flex";
+});
+
 document.getElementById("colorBody").addEventListener("input", (e) => {
   if (!window.meshParts || !window.meshParts[0]) return;
   window.meshParts[0].material.color.set(e.target.value);

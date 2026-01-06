@@ -107,6 +107,28 @@ a {
   cursor: pointer;
 }
 
+#toStep4 {
+  margin-top: 1em;
+  padding: 0.8em 1.2em;
+  font-size: 18px;
+  border: none;
+  border-radius: 6px;
+  background: #a31f1f;
+  color: white;
+  cursor: pointer;
+}
+
+#submitConfig {
+  margin-top: 1em;
+  padding: 0.8em 1.2em;
+  font-size: 18px;
+  border: none;
+  border-radius: 6px;
+  background: #a31f1f;
+  color: white;
+  cursor: pointer;
+}
+
 /* Header met terugknop + indicator */
 .step-header {
   width: 100%;

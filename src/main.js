@@ -176,7 +176,7 @@ loader.load("/3d-object/chips_arthur_de_klerck.glb", (gltf) => {
 const ambientLight = new THREE.AmbientLight(0xffffff, 0.1);
 scene.add(ambientLight);
 
-const spotLight = new THREE.SpotLight(0xffffff, 10);
+const spotLight = new THREE.SpotLight(0xffffff, 2);
 spotLight.position.set(0, 12, 5); //x, y, z
 spotLight.castShadow = true;
 spotLight.shadow.biasq = -0.0001;
@@ -204,6 +204,7 @@ function animate() {
   controls.update();
 }
 animate();
+window.renderer = renderer;
 
 window.addEventListener("click", (event) => {
   mouse.x = (event.clientX / window.innerWidth) * 2 - 1;

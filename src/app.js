@@ -1,3 +1,5 @@
+import { color } from "three/tsl";
+
 const rulesCheck = document.getElementById("rulesCheck");
 const startBtn = document.getElementById("startBtn");
 
@@ -72,19 +74,16 @@ backToStep4.addEventListener("click", () => {
   document.querySelector(".step-4").style.display = "flex";
 });
 
-document.getElementById("colorBody").addEventListener("input", (e) => {
-  if (!window.meshParts || !window.meshParts[0]) return;
-  window.meshParts[0].material.color.set(e.target.value);
-});
+document.getElementById("color").addEventListener("input", (e) => {
+  if (!window.meshParts) return;
 
-document.getElementById("colorTitle").addEventListener("input", (e) => {
-  if (!window.meshParts || !window.meshParts[2]) return;
-  window.meshParts[2].material.color.set(e.target.value);
-});
+  const logoIndex = 1;
 
-document.getElementById("colorImage").addEventListener("input", (e) => {
-  if (!window.meshParts || !window.meshParts[3]) return;
-  window.meshParts[3].material.color.set(e.target.value);
+  window.meshParts.forEach((mesh, index) => {
+    if (index !== logoIndex && mesh.material && mesh.material.color) {
+      mesh.material.color.set(e.target.value);
+    }
+  });
 });
 
 function updateTitleCanvas() {
@@ -180,39 +179,35 @@ function resetConfigurator() {
   document.getElementById("userEmail").value = "";
 }
 
+//bag opslaan naar backend
 async function saveBag() {
-  // 1. Kleur van de zak
-  const colorBody = document.getElementById("colorBody").value;
-  const colorTitle = document.getElementById("colorTitle").value;
-  const colorImage = document.getElementById("colorImage").value;
+  const storedUserId = localStorage.getItem("userId");
+  const color = document.getElementById("color").value;
+  const font = document.getElementById("titleFont").value;
 
-  // 2. Titel
   const title = document.getElementById("titleInput").value;
 
-  // 3. Smaken
   const flavors = [
     document.getElementById("flavorSelect1").value,
     document.getElementById("flavorSelect2").value,
     document.getElementById("flavorSelect3").value,
   ];
 
-  // 4. Gebruikersgegevens
   const userName = document.getElementById("userName").value;
   const userEmail = document.getElementById("userEmail").value;
+  const screenshot = renderer.domElement.toDataURL("image/png");
 
-  // 5. Bouw het object dat naar de backend gaat
   const bagData = {
-    colors: {
-      body: colorBody,
-      title: colorTitle,
-      image: colorImage,
-    },
-    title: title,
+    color: color,
+    name: title,
     flavors: flavors,
+    font: font,
     user: {
       name: userName,
       email: userEmail,
     },
+    userId: storedUserId || "anonymous",
+    image: screenshot,
   };
 
   console.log("👉 Versturen naar backend:", bagData);

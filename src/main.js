@@ -77,11 +77,13 @@ loader.load("/3d-object/chips_arthur_de_klerck.glb", (gltf) => {
 
   model.name = "chips";
   chipsModel = model;
+  window.meshParts = [];
   let meshIndex = 0;
 
   model.traverse((child) => {
     if (child.isMesh) {
       child.userData.index = meshIndex;
+      window.meshParts[meshIndex] = child;
       console.log("mesh", meshIndex, "=", child.name);
       meshIndex++;
       child.castShadow = true;

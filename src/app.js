@@ -30,14 +30,20 @@ toStep2.addEventListener("click", () => {
   // hier komt straks je naam-stap
 });
 
-const colorPicker = document.getElementById("colorPicker");
+// ⭐ Kleur voor de body
+document.getElementById("colorBody").addEventListener("input", (e) => {
+  if (!window.meshParts || !window.meshParts[0]) return;
+  window.meshParts[0].material.color.set(e.target.value);
+});
 
-colorPicker.addEventListener("input", () => {
-  if (!window.selectedMesh) return; // geen mesh geselecteerd
+// ⭐ Kleur voor de titel
+document.getElementById("colorTitle").addEventListener("input", (e) => {
+  if (!window.meshParts || !window.meshParts[2]) return;
+  window.meshParts[2].material.color.set(e.target.value);
+});
 
-  const hex = colorPicker.value;
-  window.selectedMesh.material.color.set(hex);
-  console.log("Gekozen kleur:", hex);
-
-  // later: chipszak materiaal aanpassen
+// ⭐ Kleur voor de afbeelding / groot vlak
+document.getElementById("colorImage").addEventListener("input", (e) => {
+  if (!window.meshParts || !window.meshParts[3]) return;
+  window.meshParts[3].material.color.set(e.target.value);
 });

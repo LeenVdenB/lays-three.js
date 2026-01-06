@@ -1,8 +1,9 @@
 import { color } from "three/tsl";
 
-// User ophalen uit de URL
 const params = new URLSearchParams(window.location.search);
-const userEmail = params.get("user");
+const userEmail = params.get("user") || "anonymous";
+
+console.log("Ingelogde gebruiker:", userEmail);
 
 // Als er geen user is → anonymous
 const currentUser = userEmail || "anonymous";
@@ -215,7 +216,7 @@ async function saveBag() {
       name: userName,
       email: userEmail,
     },
-    userId: storedUserId || "anonymous",
+    userId: storedUserId || currentUser,
     image: screenshot,
   };
 

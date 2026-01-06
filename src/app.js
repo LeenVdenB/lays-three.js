@@ -14,6 +14,7 @@ rulesCheck.addEventListener("change", () => {
 startBtn.addEventListener("click", () => {
   document.querySelector(".text").style.display = "none";
   document.querySelector(".step-1").style.display = "flex";
+  document.getElementById("resetBtn").style.display = "block";
 });
 
 const backToIntro = document.getElementById("backToIntro");
@@ -130,6 +131,107 @@ document.getElementById("imageUpload").addEventListener("change", function (e) {
   img.src = URL.createObjectURL(file);
 });
 
+function resetConfigurator() {
+  document
+    .querySelectorAll(".text")
+    .forEach((el) => (el.style.display = "none"));
+  document.querySelector(".step-1").style.display = "flex";
+  document.getElementById("colorBody").value = "#ff0000";
+  document.getElementById("colorTitle").value = "#ff0000";
+  document.getElementById("colorImage").value = "#ff0000";
+
+  if (window.meshParts) {
+    if (window.meshParts[0]) window.meshParts[0].material.color.set("#ff0000");
+    if (window.meshParts[2]) window.meshParts[2].material.color.set("#ff0000");
+    if (window.meshParts[3]) window.meshParts[3].material.color.set("#ff0000");
+  }
+
+  document.getElementById("titleInput").value = "";
+  document.getElementById("titleSize").value = 120;
+  document.getElementById("titleColor").value = "#000000";
+  document.getElementById("titleFont").value = "Arial";
+
+  if (window.titleCtx && window.titleCanvas) {
+    window.titleCtx.clearRect(
+      0,
+      0,
+      window.titleCanvas.width,
+      window.titleCanvas.height
+    );
+    window.titleTexture.needsUpdate = true;
+  }
+
+  document.getElementById("imageUpload").value = "";
+
+  if (window.imageCtx && window.imageCanvas) {
+    window.imageCtx.clearRect(
+      0,
+      0,
+      window.imageCanvas.width,
+      window.imageCanvas.height
+    );
+    window.imageTexture.needsUpdate = true;
+  }
+  document.getElementById("flavorSelect1").value = "";
+  document.getElementById("flavorSelect2").value = "";
+  document.getElementById("flavorSelect3").value = "";
+
+  document.getElementById("userName").value = "";
+  document.getElementById("userEmail").value = "";
+}
+
+async function saveBag() {
+  // 1. Kleur van de zak
+  const colorBody = document.getElementById("colorBody").value;
+  const colorTitle = document.getElementById("colorTitle").value;
+  const colorImage = document.getElementById("colorImage").value;
+
+  // 2. Titel
+  const title = document.getElementById("titleInput").value;
+
+  // 3. Smaken
+  const flavors = [
+    document.getElementById("flavorSelect1").value,
+    document.getElementById("flavorSelect2").value,
+    document.getElementById("flavorSelect3").value,
+  ];
+
+  // 4. Gebruikersgegevens
+  const userName = document.getElementById("userName").value;
+  const userEmail = document.getElementById("userEmail").value;
+
+  // 5. Bouw het object dat naar de backend gaat
+  const bagData = {
+    colors: {
+      body: colorBody,
+      title: colorTitle,
+      image: colorImage,
+    },
+    title: title,
+    flavors: flavors,
+    user: {
+      name: userName,
+      email: userEmail,
+    },
+  };
+
+  console.log("👉 Versturen naar backend:", bagData);
+
+  // 6. Verstuur naar jouw backend
+  const response = await fetch("http://localhost:3000/api/v1/bag", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(bagData),
+  });
+
+  const result = await response.json();
+  console.log("👉 Backend antwoord:", result);
+
+  alert("Je chipszak is verstuurd!");
+}
+
 document
   .getElementById("titleInput")
   .addEventListener("input", updateTitleCanvas);
@@ -142,3 +244,7 @@ document
 document
   .getElementById("titleSize")
   .addEventListener("input", updateTitleCanvas);
+document
+  .getElementById("resetBtn")
+  .addEventListener("click", resetConfigurator);
+document.getElementById("submitConfig").addEventListener("click", saveBag);

@@ -41,6 +41,22 @@ a {
   border-radius: 5% 0 0 5%;
   box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
 }
+
+.reset-button {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 12px 20px;
+  background: #ff4747;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  z-index: 9999;
+}
+
 .rules {
   display: flex;
   align-items: center;

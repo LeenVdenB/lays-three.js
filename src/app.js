@@ -243,3 +243,6 @@ document
   .getElementById("resetBtn")
   .addEventListener("click", resetConfigurator);
 document.getElementById("submitConfig").addEventListener("click", saveBag);
+document.getElementById("backHomeBtn").addEventListener("click", () => {
+  window.location.href = "https://lays-do-us-a-flavor.netlify.app/";
+});

@@ -66,23 +66,36 @@ stand.load("/3d-object/small_stand.glb", (gltf) => {
   scene.add(model);
 });
 
-// ⭐ Canvas voor titel
+//titel text
 const titleCanvasElement = document.createElement("canvas");
 titleCanvasElement.width = 1024;
 titleCanvasElement.height = 256;
 
 const titleCtxElement = titleCanvasElement.getContext("2d");
-// transparante achtergrond
 titleCtxElement.clearRect(
   0,
   0,
   titleCanvasElement.width,
   titleCanvasElement.height
 );
-
-// Globaal maken
 window.titleCanvas = titleCanvasElement;
 window.titleCtx = titleCtxElement;
+
+//image canvas
+const imageCanvasElement = document.createElement("canvas");
+imageCanvasElement.width = 1024;
+imageCanvasElement.height = 1024;
+
+const imageCtxElement = imageCanvasElement.getContext("2d");
+imageCtxElement.clearRect(
+  0,
+  0,
+  imageCanvasElement.width,
+  imageCanvasElement.height
+);
+
+window.imageCanvas = imageCanvasElement;
+window.imageCtx = imageCtxElement;
 
 let chipsModel = null;
 //gltf loader van de chipszak
@@ -108,7 +121,7 @@ loader.load("/3d-object/chips_arthur_de_klerck.glb", (gltf) => {
       child.receiveShadow = true;
     }
   });
-
+  // Titel toevoegen als een apart vlak met de canvas als textuur
   const titleTexture = new THREE.CanvasTexture(window.titleCanvas);
   const titleMaterial = new THREE.MeshBasicMaterial({
     map: titleTexture,
@@ -129,6 +142,28 @@ loader.load("/3d-object/chips_arthur_de_klerck.glb", (gltf) => {
 
   window.titlePlane = titlePlane;
   window.titleTexture = titleTexture;
+
+  //afbeelding toevoegen als een apart vlak met de canvas als textuur
+  const imageTexture = new THREE.CanvasTexture(window.imageCanvas);
+
+  const imageMaterial = new THREE.MeshBasicMaterial({
+    map: imageTexture,
+    transparent: true,
+  });
+  const imagePlane = new THREE.Mesh(
+    new THREE.PlaneGeometry(3.5, 2),
+    imageMaterial
+  );
+  imagePlane.position.copy(window.meshParts[3].position);
+  imagePlane.position.z += 2;
+  imagePlane.position.y += 2.5;
+  imagePlane.position.x -= 3.9;
+  imagePlane.quaternion.copy(window.meshParts[3].quaternion);
+  imagePlane.rotation.x += 2.9;
+
+  scene.add(imagePlane);
+  window.imagePlane = imagePlane;
+  window.imageTexture = imageTexture;
 
   scene.add(model);
 });

@@ -12,15 +12,15 @@ rulesCheck.addEventListener("change", () => {
 });
 
 startBtn.addEventListener("click", () => {
-  document.querySelector(".text").style.display = "none"; // intro weg
-  document.querySelector(".step-1").style.display = "flex"; // stap 1 tonen
+  document.querySelector(".text").style.display = "none";
+  document.querySelector(".step-1").style.display = "flex";
 });
 
 const backToIntro = document.getElementById("backToIntro");
 
 backToIntro.addEventListener("click", () => {
   document.querySelector(".step-1").style.display = "none";
-  document.querySelector(".text").style.display = "flex"; // intro terug
+  document.querySelector(".text").style.display = "flex";
 });
 
 const toStep2 = document.getElementById("toStep2");
@@ -57,6 +57,18 @@ const backToStep3 = document.getElementById("backToStep3");
 backToStep3.addEventListener("click", () => {
   document.querySelector(".step-4").style.display = "none";
   document.querySelector(".step-3").style.display = "flex";
+});
+
+const toStep5 = document.getElementById("toStep5");
+toStep5.addEventListener("click", () => {
+  document.querySelector(".step-4").style.display = "none";
+  document.querySelector(".step-5").style.display = "flex";
+});
+
+const backToStep4 = document.getElementById("backToStep4");
+backToStep4.addEventListener("click", () => {
+  document.querySelector(".step-5").style.display = "none";
+  document.querySelector(".step-4").style.display = "flex";
 });
 
 document.getElementById("colorBody").addEventListener("input", (e) => {

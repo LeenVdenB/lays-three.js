@@ -47,7 +47,7 @@
         <div class="text step-1" style="display: none">
           <div class="step-header">
             <button class="back-btn" id="backToIntro">← Ga terug</button>
-            <span class="step-indicator">Stap 1 van 4</span>
+            <span class="step-indicator">Stap 1 van 5</span>
           </div>
           <h1>Kies een kleur</h1>
 
@@ -66,7 +66,7 @@
           >
           <input type="color" id="colorImage" value="#ff0000" />
 
-          <button id="toStep2">Volgende stap</button>
+          <button class="nextStepbtn" id="toStep2">Volgende stap</button>
         </div>
       </section>
       <section>
@@ -74,7 +74,7 @@
         <div class="text step-2" style="display: none">
           <div class="step-header">
             <button class="back-btn" id="backToStep1">← Ga terug</button>
-            <span class="step-indicator">Stap 2 van 4</span>
+            <span class="step-indicator">Stap 2 van 5</span>
           </div>
           <h1>Kies een naam voor jouw chipssmaak!</h1>
           <div class="options">
@@ -98,7 +98,7 @@
               <option value="Times New Roman">Times New Roman</option>
             </select>
           </div>
-          <button id="toStep3">Volgende stap</button>
+          <button class="nextStepbtn" id="toStep3">Volgende stap</button>
         </div>
       </section>
       <section>
@@ -106,7 +106,7 @@
         <div class="text step-3" style="display: none">
           <div class="step-header">
             <button class="back-btn" id="backToStep2">← Ga terug</button>
-            <span class="step-indicator">Stap 3 van 4</span>
+            <span class="step-indicator">Stap 3 van 5</span>
           </div>
 
           <h1>Voeg een afbeelding toe</h1>
@@ -117,15 +117,48 @@
             <input type="file" id="imageUpload" accept="image/*" />
           </div>
 
-          <button id="toStep4">Volgende stap</button>
+          <button class="nextStepbtn" id="toStep4">Volgende stap</button>
         </div>
       </section>
       <section>
-        <!-- Stap 4: Gegevens invullen -->
+        <!-- Stap 4: Smaak toevoegen -->
         <div class="text step-4" style="display: none">
           <div class="step-header">
             <button class="back-btn" id="backToStep3">← Ga terug</button>
-            <span class="step-indicator">Stap 4 van 4</span>
+            <span class="step-indicator">Stap 4 van 5</span>
+          </div>
+
+          <h1>Kies een smaak</h1>
+          <div class="options">
+            <label class="display" for="flavorSelect"
+              >Geef jouw chips een smaak:</label
+            >
+            <input
+              type="text"
+              id="flavorSelect1"
+              placeholder="Typ je eerste smaak..."
+            />
+            <input
+              type="text"
+              id="flavorSelect2"
+              placeholder="Typ een tweede smaak..."
+            />
+            <input
+              type="text"
+              id="flavorSelect3"
+              placeholder="Typ een derde smaak..."
+            />
+          </div>
+
+          <button class="nextStepbtn" id="toStep5">Volgende stap</button>
+        </div>
+      </section>
+      <section>
+        <!-- Stap 5: Gegevens invullen -->
+        <div class="text step-5" style="display: none">
+          <div class="step-header">
+            <button class="back-btn" id="backToStep3">← Ga terug</button>
+            <span class="step-indicator">Stap 5 van 5</span>
           </div>
 
           <h1>Jouw gegevens</h1>
@@ -142,7 +175,7 @@
             <input type="email" id="userEmail" placeholder="naam@example.com" />
           </div>
 
-          <button id="submitConfig">Indienen</button>
+          <button class="nextStepbtn" id="submitConfig">Indienen</button>
         </div>
       </section>
     </main>

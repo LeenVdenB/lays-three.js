@@ -44,8 +44,8 @@ controls.minPolarAngle = 0.5;
 controls.maxPolarAngle = 1.5;
 controls.autoRotate = false;
 controls.target = new THREE.Vector3(-2, 2, 0);
-controls.minAzimuthAngle = -Math.PI * (70 / 180); // -70°
-controls.maxAzimuthAngle = Math.PI * (70 / 180); // +70°
+controls.minAzimuthAngle = -Math.PI * (70 / 180);
+controls.maxAzimuthAngle = Math.PI * (70 / 180);
 
 // stand loader
 const stand = new GLTFLoader();
@@ -53,7 +53,7 @@ stand.load("/3d-object/small_stand.glb", (gltf) => {
   const model = gltf.scene;
   model.position.set(1, -7, 1);
   model.rotation.y = 0;
-  model.scale.set(8, 8, 8); // vergroot indien te klein
+  model.scale.set(8, 8, 8);
 
   model.traverse((child) => {
     if (child.isMesh) {
@@ -104,7 +104,7 @@ loader.load("/3d-object/chips_arthur_de_klerck.glb", (gltf) => {
   const model = gltf.scene;
   model.position.set(-4, 4, 0);
   model.rotation.y = 0.5;
-  model.scale.set(3, 3, 3); // vergroot indien te klein
+  model.scale.set(3, 3, 3);
 
   model.name = "chips";
   chipsModel = model;
@@ -191,12 +191,10 @@ new RGBELoader().load("/environment/studio_small_03_4k.hdr", (texture) => {
 
 //Canvas voor titel
 export const titleCanvas = document.createElement("canvas");
-titleCanvas.width = 1024; // hoge resolutie voor scherpe tekst
+titleCanvas.width = 1024;
 titleCanvas.height = 512;
 
 export const titleCtx = titleCanvas.getContext("2d");
-
-// Voorlopig: canvas leegmaken
 titleCtx.clearRect(0, 0, titleCanvas.width, titleCanvas.height);
 
 //render scene
@@ -208,14 +206,9 @@ function animate() {
 animate();
 
 window.addEventListener("click", (event) => {
-  // muispositie normaliseren
   mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
   mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-
-  // raycast uitvoeren
   raycaster.setFromCamera(mouse, camera);
-
-  // alleen raycasten op de chipszak, niet op de hele scene
   if (!chipsModel) return;
 
   const intersects = raycaster.intersectObjects(chipsModel.children, true);
@@ -226,6 +219,4 @@ window.addEventListener("click", (event) => {
   }
 
   window.selectedMesh = intersects[0].object;
-  console.log("Geselecteerd mesh index:", window.selectedMesh.userData.index);
-  window.selectedMesh.material.color.set("#ff0000");
 });

@@ -63,7 +63,7 @@ a {
   background: #a31f1f;
   color: rgb(255, 255, 255);
   cursor: pointer;
-  opacity: 0.4; /* disabled look */
+  opacity: 0.4;
 }
 
 #startBtn.enabled {
@@ -71,7 +71,6 @@ a {
   cursor: pointer;
 }
 
-/* Stap 1 styling */
 .step-1 {
   flex-direction: column;
   gap: 1em;
@@ -86,28 +85,7 @@ a {
   background: none;
 }
 
-#toStep2 {
-  padding: 0.8em 1.2em;
-  font-size: 18px;
-  border: none;
-  border-radius: 6px;
-  background: #a31f1f;
-  color: white;
-  cursor: pointer;
-}
-
-#toStep3 {
-  margin-top: 1em;
-  padding: 0.8em 1.2em;
-  font-size: 18px;
-  border: none;
-  border-radius: 6px;
-  background: #a31f1f;
-  color: white;
-  cursor: pointer;
-}
-
-#toStep4 {
+.nextStepbtn {
   margin-top: 1em;
   padding: 0.8em 1.2em;
   font-size: 18px;
@@ -129,7 +107,6 @@ a {
   cursor: pointer;
 }
 
-/* Header met terugknop + indicator */
 .step-header {
   width: 100%;
   display: flex;

@@ -223,7 +223,7 @@ async function saveBag() {
   console.log("👉 Versturen naar backend:", bagData);
 
   // 6. Verstuur naar jouw backend
-  const response = await fetch("http://localhost:3000/api/v1/bag", {
+  const response = await fetch("https://lays-api.onrender.com/api/v1/bag", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

@@ -24,10 +24,16 @@ backToIntro.addEventListener("click", () => {
 });
 
 const toStep2 = document.getElementById("toStep2");
-
 toStep2.addEventListener("click", () => {
-  console.log("Ga naar stap 2");
-  // hier komt straks je naam-stap
+  document.querySelector(".step-1").style.display = "none";
+  document.querySelector(".step-2").style.display = "flex";
+});
+
+const backToStep1 = document.getElementById("backToStep1");
+
+backToStep1.addEventListener("click", () => {
+  document.querySelector(".step-2").style.display = "none";
+  document.querySelector(".step-1").style.display = "flex";
 });
 
 // ⭐ Kleur voor de body

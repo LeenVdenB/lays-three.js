@@ -48,6 +48,13 @@ a {
   padding: 1em 0;
 }
 
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  margin-top: 0.5em;
+}
+
 #startBtn {
   padding: 0.8em 1.2em;
   font-size: 18px;
@@ -80,6 +87,17 @@ a {
 }
 
 #toStep2 {
+  padding: 0.8em 1.2em;
+  font-size: 18px;
+  border: none;
+  border-radius: 6px;
+  background: #a31f1f;
+  color: white;
+  cursor: pointer;
+}
+
+#toStep3 {
+  margin-top: 1em;
   padding: 0.8em 1.2em;
   font-size: 18px;
   border: none;

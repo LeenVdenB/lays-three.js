@@ -69,6 +69,34 @@
           <button id="toStep2">Volgende stap</button>
         </div>
       </section>
+      <section>
+        <!-- Stap 2: Titel toevoegen -->
+        <div class="text step-2" style="display: none">
+          <div class="step-header">
+            <button class="back-btn" id="backToStep1">← Ga terug</button>
+            <span class="step-indicator">Stap 2 van 3</span>
+          </div>
+          <h1>Kies een naam voor jouw chipssmaak!</h1>
+          <div class="options">
+            <label class="display" for="titleInput">Titel:</label>
+            <input type="text" id="titleInput" placeholder="Typ je titel..." />
+          </div>
+          <div class="options">
+            <label class="display" for="titleColor">Tekstkleur:</label>
+            <input type="color" id="titleColor" value="#000000" />
+          </div>
+          <div class="options">
+            <label class="display" for="titleFont">Lettertype:</label>
+            <select id="titleFont">
+              <option value="Arial">Arial</option>
+              <option value="Impact">Impact</option>
+              <option value="Comic Sans MS">Comic Sans</option>
+              <option value="Times New Roman">Times New Roman</option>
+            </select>
+          </div>
+          <button id="toStep3">Volgende stap</button>
+        </div>
+      </section>
     </main>
 
     <script type="module" src="/src/main.js"></script>
